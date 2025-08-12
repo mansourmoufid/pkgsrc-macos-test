@@ -1,0 +1,29 @@
+name: Build
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run pkgsrc on macOS
+      if: matrix.os == 'macos-latest'
+      run: |
+        sw_vers
+        sudo xcode-select --switch /Library/Developer/CommandLineTools
+        xcode-select -p
+        clang --version
+        /bin/sh install.sh
+        /bin/sh build-packages.sh
+    - name: Run pkgsrc on Linux
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        clang --version
+        /bin/sh install.sh
+        /bin/sh build-packages.sh
