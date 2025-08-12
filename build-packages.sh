@@ -15,5 +15,6 @@ pkg=$(pwd)/pkg
 )
 (
     cd $usr/pkgsrc/devel/cmake
+    bmake configure || cat work/cmake-*/Bootstrap.cmk/cmake_bootstrap.log
     bmake build install clean clean-depends
 )
