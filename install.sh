@@ -14,7 +14,10 @@ cd $usr/pkgsrc/bootstrap &&
         --cwrappers no \
         --mk-fragment $dir/mk.conf \
         --prefix $pkg \
-        --unprivileged
+        --unprivileged ||
+    (
+        cat $usr/pkgsrc/bootstrap/work/bmake/config.log
+    )
 cat << EOF > $pkg/.pkgsrc_profile
 export PATH="$pkg/bin:\$PATH"
 export PATH="$pkg/sbin:\$PATH"
