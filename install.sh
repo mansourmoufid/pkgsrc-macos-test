@@ -8,6 +8,7 @@ mkdir -p $pkg
 curl -L -O https://cdn.netbsd.org/pub/pkgsrc/stable/pkgsrc.tgz
 mkdir -p $usr
 gunzip < pkgsrc.tgz| tar -f - -x -C $usr
+unset MACOSX_DEPLOYMENT_TARGET
 cd $usr/pkgsrc/bootstrap &&
     ./bootstrap \
         --compiler clang \
