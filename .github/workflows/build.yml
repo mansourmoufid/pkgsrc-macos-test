@@ -16,10 +16,8 @@ jobs:
       if: matrix.os == 'macos-latest'
       run: |
         sw_vers
-        sudo xcode-select --switch /Library/Developer/CommandLineTools
         xcode-select -p
         clang --version
-        export MACOSX_DEPLOYMENT_TARGET="11.0"
         /bin/sh install.sh
         /bin/sh build-packages.sh
     - name: Run pkgsrc on Linux
